@@ -21,7 +21,7 @@ import com.zyl.hadoop.reducer.WordCountReducer;
  * @version $Id$
  */
 public class WordCountJob {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException {
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf, "word count");
         job.setJarByClass(WordCountJob.class);
@@ -33,5 +33,6 @@ public class WordCountJob {
         
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        System.out.println(job.waitForCompletion(true));
     }
 }

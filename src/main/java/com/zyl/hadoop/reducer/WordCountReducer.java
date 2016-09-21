@@ -9,6 +9,8 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
+import com.zyl.hadoop.util.HadoopEnCodeUtil;
+
 /**
  * @author zhuyl<a href="mailto:zhuyl@chsi.com.cn">zhu Youliang</a>
  * @version $Id$
@@ -25,6 +27,6 @@ public class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritab
         }
         
         result.set(sum);
-        context.write(key, result);
+        context.write(HadoopEnCodeUtil.transTextToCharset(key, "UTF-8"), result);
     }
 }
